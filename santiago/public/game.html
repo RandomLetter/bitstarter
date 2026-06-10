@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Santiago</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site">
+    <h1>Santiago</h1>
+    <p class="tagline" id="who"></p>
+  </header>
+  <main>
+    <div class="card" id="statusbar"></div>
+    <div class="layout">
+      <div>
+        <div class="card" id="board-wrap">
+          <svg id="board"></svg>
+        </div>
+        <div class="card" id="tiles-card">
+          <h3 style="margin-top:0">Plantations up for auction</h3>
+          <div class="tiles-row" id="tiles"></div>
+        </div>
+        <div class="card" id="actions"></div>
+        <div class="card" id="scores-card" hidden></div>
+      </div>
+      <div>
+        <div class="card">
+          <h3 style="margin-top:0">Players</h3>
+          <ul class="players-list" id="players"></ul>
+          <p id="supply" style="margin-bottom:0"></p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Game log</h3>
+          <div id="log"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/game.js"></script>
+</body>
+</html>
