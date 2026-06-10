@@ -2,7 +2,10 @@
 /* Santiago client. Polls the server for state and renders the board as SVG. */
 
 const TOKEN = location.pathname.split('/').pop();
-const API = `/api/g/${TOKEN}`;
+// Everything before "/g/<token>" is the app root ('' at the domain root,
+// '/santiago' when deployed under a path prefix).
+const ROOT = location.pathname.replace(/\/g\/[^/]*$/, '');
+const API = `${ROOT}/api/g/${TOKEN}`;
 
 const CROP_EMOJI = { banana: '🍌', sugar: '🎋', potato: '🥔', bean: '🫘', pepper: '🌶️' };
 const CROP_FILL = {

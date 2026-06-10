@@ -31,7 +31,14 @@ The game ends after 11 rounds (3–4 players) or 9 rounds (5 players) with final
 drying and scoring: connected same-crop areas pay (tiles × your markers).
 Money is hidden information — players only see their own balance until the end.
 
-## Running
+## Deploying to Cloudflare
+
+See [DEPLOY_CLOUDFLARE.md](DEPLOY_CLOUDFLARE.md) — the app includes a
+Cloudflare Workers backend (`worker/index.js`, D1 storage, Resend email)
+sharing the same engine and frontend, preconfigured for
+`https://budoludo.com/santiago`.
+
+## Running locally
 
 ```sh
 cd santiago

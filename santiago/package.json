@@ -13,5 +13,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "wrangler": "^4.99.0"
   }
 }

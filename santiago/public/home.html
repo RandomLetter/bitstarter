@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Santiago — play online</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site">
@@ -67,7 +67,7 @@
         name: row.querySelector('input[type="text"]').value.trim(),
         email: row.querySelector('input[type="email"]').value.trim(),
       })).filter((p) => p.name);
-      const res = await fetch('/api/games', {
+      const res = await fetch('api/games', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ players }),
@@ -82,7 +82,8 @@
       ul.innerHTML = '';
       for (const link of data.links) {
         const li = document.createElement('li');
-        const url = location.origin + link.url;
+        // Works at the domain root and under a path prefix like /santiago/.
+        const url = location.origin + location.pathname.replace(/\/$/, '') + link.url;
         li.innerHTML = `<strong></strong> (<span></span>): <code></code> <button type="button" class="secondary">Copy</button>`;
         li.querySelector('strong').textContent = link.name;
         li.querySelector('span').textContent = link.color;

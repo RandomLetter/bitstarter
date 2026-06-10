@@ -4,6 +4,8 @@
 // If SMTP_HOST is not set, messages are logged to the console instead so the
 // game remains fully playable in development (players share their links).
 
+const emails = require('./emails');
+
 let transport = null;
 
 function init() {
@@ -27,7 +29,7 @@ function baseUrl(req) {
   return `${req.protocol}://${req.get('host')}`;
 }
 
-async function send(to, subject, text) {
+async function send(to, { subject, text }) {
   if (!to) return;
   if (!transport) {
     console.log(`[mail -> ${to}] ${subject}\n${text}\n`);
@@ -50,43 +52,15 @@ function gameLink(req, token) {
 }
 
 async function sendInvite(req, game, player) {
-  await send(
-    player.email,
-    'You have been invited to a game of Santiago',
-    `Hello ${player.name},\n\n`
-    + `You are playing ${player.color} in a ${game.players.length}-player game of Santiago.\n\n`
-    + `This is your personal link — keep it secret, it is your login:\n`
-    + `${gameLink(req, player.token)}\n\n`
-    + `The game is asynchronous: you will get an email whenever it is your turn.\n`,
-  );
+  await send(player.email, emails.inviteEmail(game, player, gameLink(req, player.token)));
 }
 
 async function sendYourTurn(req, game, player) {
-  const phaseNames = {
-    bidding: 'bid on the new plantations',
-    placement: 'choose and place a plantation tile',
-    lastTile: 'place the leftover neutral tile',
-    bribe: 'propose or support a canal (or pass)',
-    decision: 'decide where the canal is built (you are the Canal Overseer)',
-    extra: 'decide whether to place your extra canal',
-  };
-  await send(
-    player.email,
-    `Santiago: it's your turn (round ${game.round} of ${game.totalRounds})`,
-    `Hello ${player.name},\n\n`
-    + `It is your turn to ${phaseNames[game.phase] || 'act'}.\n\n`
-    + `Play here: ${gameLink(req, player.token)}\n`,
-  );
+  await send(player.email, emails.yourTurnEmail(game, player, gameLink(req, player.token)));
 }
 
 async function sendGameOver(req, game, player) {
-  const lines = game.scores.map((s, i) => `${i + 1}. ${s.name} (${s.color}) — ${s.total} Escudos`);
-  await send(
-    player.email,
-    'Santiago: the game is over!',
-    `Hello ${player.name},\n\nFinal scores:\n${lines.join('\n')}\n\n`
-    + `See the final board: ${gameLink(req, player.token)}\n`,
-  );
+  await send(player.email, emails.gameOverEmail(game, player, gameLink(req, player.token)));
 }
 
 module.exports = { init, sendInvite, sendYourTurn, sendGameOver };
