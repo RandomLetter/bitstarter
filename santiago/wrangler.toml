@@ -17,7 +17,7 @@ html_handling = "none"
 binding = "DB"
 database_name = "santiago"
 # Replace with the id printed by: npx wrangler d1 create santiago
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "c5c8e441-0990-4603-a2c4-accb62e1e87c"
 
 [vars]
 BASE_PATH = "/santiago"
