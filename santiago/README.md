@@ -31,6 +31,13 @@ The game ends after 11 rounds (3–4 players) or 9 rounds (5 players) with final
 drying and scoring: connected same-crop areas pay (tiles × your markers).
 Money is hidden information — players only see their own balance until the end.
 
+## How-to-play slide deck
+
+A 15-slide deck explaining the rules (with generated diagrams matching the
+app's visuals) lives in [deck/](deck/) — grab
+[the PDF](deck/Santiago-How-to-Play.pdf) or regenerate it from the scripts
+there.
+
 ## Deploying to Cloudflare
 
 See [DEPLOY_CLOUDFLARE.md](DEPLOY_CLOUDFLARE.md) — the app includes a
